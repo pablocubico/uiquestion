@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 function App() {
   const [ isLoading, setIsLoading ] = useState(false);
-  const [ page, setPage ] = useState(1);
+  const [ page ] = useState(1);
   const [ articles, setArticles ] = useState([]);
 
   useEffect(() => {
