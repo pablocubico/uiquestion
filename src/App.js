@@ -73,7 +73,7 @@ function App() {
                 href={ `https://www.pinkvilla.com/${article.path}` }
                 rel="noreferrer">
                 <div className='articlePicture'>
-                  <img alt="Placeholder pic." src={ `https://www.pinkvilla.com/${article.field_photo_image_section}` } />
+                  <img alt={ article.title } src={ `https://www.pinkvilla.com/${article.field_photo_image_section}` } />
                 </div>
                 <div className='articleContent'>
                   <h1>{ article.title }</h1>
