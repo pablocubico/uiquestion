@@ -29,16 +29,20 @@
   padding: 20px;
   box-shadow: 0 2px 20px rgba(0,0,0,.25);
   border-radius: 20px;
+  margin-bottom: 40px;
+  cursor: pointer;
 }
 
 .articleCard .articleContent {
   width: 100%;
   flex-grow: 2;
-  padding: 20px;
+  padding: 0 20px 20px 20px;
 }
 
 .articleCard .articlePicture img {
   border-radius: 10px;
+  width: 250px;
+  height: 250px;
 }
 
 .articleCard .articleContent h1 {
@@ -47,4 +51,11 @@
 
 .articleCard .articleContent .articleDate {
   color: #888888;
+}
+
+.loader {
+  max-width: 800px;
+  padding: 20px;
+  margin: 20px auto;
+  text-align: center;
 }
