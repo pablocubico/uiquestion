@@ -54,8 +54,10 @@
 }
 
 .loader {
+  display: flex;
   max-width: 800px;
-  padding: 20px;
+  height: 100px;
   margin: 20px auto;
-  text-align: center;
+  align-items: center;
+  justify-content: center;
 }

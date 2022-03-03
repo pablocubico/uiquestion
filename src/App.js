@@ -1,10 +1,12 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 function App() {
   const [ isLoading, setIsLoading ] = useState(false);
-  const [ page ] = useState(1);
+  const [ page, setPage ] = useState(0);
   const [ articles, setArticles ] = useState([]);
+  const scrollObserver = useRef(null);
+  const loaderElement = useRef(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -21,6 +23,21 @@ function App() {
     }
     fetchArticles();
   }, [page])
+
+  useEffect(() => {
+    const element = loaderElement.current;
+    scrollObserver.current = new IntersectionObserver(entries => {
+      // Skip if there are no articles yet (i.e.: the first load)
+      if (entries[0].isIntersecting && articles.length) {
+        setPage(current => current + 1);
+      }
+    }, { threshold: 1 });
+    scrollObserver.current.observe(element);
+
+    return () => {
+      scrollObserver.current.unobserve(element);
+    }
+  }, [articles]);
 
   return (
     <div className="App">
@@ -47,7 +64,13 @@ function App() {
           })
         }
         {
-          isLoading && <div className='loader'>Loading...</div>
+          <div className='loader' ref={loaderElement}>
+            {
+              isLoading
+              ? 'Loading...'
+              : 'Show more results'
+            }
+          </div>
         }
       </div>
     </div>
