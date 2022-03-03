@@ -1,10 +1,14 @@
 import './App.css';
 import { useEffect, useState, useRef } from 'react';
 
+const searchParams = new URLSearchParams(window.location.search);
+const startPage = parseInt(searchParams.get('page')) || 0;
+
 function App() {
   const [ isLoading, setIsLoading ] = useState(false);
-  const [ page, setPage ] = useState(0);
+  const [ page, setPage ] = useState(startPage);
   const [ articles, setArticles ] = useState([]);
+  const [ allArticlesLoaded, setAllArticlesLoaded ] = useState(false);
   const scrollObserver = useRef(null);
   const loaderElement = useRef(null);
 
@@ -15,11 +19,15 @@ function App() {
       const newArticles = await articlesResponse.json();
 
       setIsLoading(false);
-      setArticles(previous => [
-        ...previous,
-        // Flattening a bit for convenience
-        ...newArticles.nodes.map(article => article.node)
-      ]);
+      if (newArticles.nodes.length) {
+        setArticles(previous => [
+          ...previous,
+          // Flattening a bit for convenience
+          ...newArticles.nodes.map(article => article.node)
+        ]);
+      } else {
+        setAllArticlesLoaded(true);
+      }
     }
     fetchArticles();
   }, [page])
@@ -38,6 +46,14 @@ function App() {
       scrollObserver.current.unobserve(element);
     }
   }, [articles]);
+
+  useEffect(() => {
+    if (allArticlesLoaded) {
+      scrollObserver.current.unobserve(loaderElement.current);
+    }
+  }, [allArticlesLoaded]);
+
+  const loadingText = isLoading ? 'Loading...' : 'Show more results';
 
   return (
     <div className="App">
@@ -70,9 +86,9 @@ function App() {
         {
           <div className='loader' ref={loaderElement}>
             {
-              isLoading
-              ? 'Loading...'
-              : 'Show more results'
+              allArticlesLoaded
+              ? 'All articles loaded.'
+              : loadingText
             }
           </div>
         }
