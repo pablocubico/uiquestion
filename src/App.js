@@ -51,7 +51,11 @@ function App() {
         {
           articles.map((article, i) => {
             return (
-              <div className='articleCard' key={i}>
+              <a key={i}
+                className='articleCard'
+                target="_blank"
+                href={ `https://www.pinkvilla.com/${article.path}` }
+                rel="noreferrer">
                 <div className='articlePicture'>
                   <img alt="Placeholder pic." src={ `https://www.pinkvilla.com/${article.field_photo_image_section}` } />
                 </div>
@@ -59,7 +63,7 @@ function App() {
                   <h1>{ article.title }</h1>
                   <p className='articleDate'>Dec 02, 2021 03:51 AM IST</p>
                 </div>
-              </div>
+              </a>
             )
           })
         }
