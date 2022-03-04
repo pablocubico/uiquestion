@@ -45,7 +45,8 @@ const Articles = ({ startPage, forceError }) => {
     const element = loaderElement.current;
     scrollObserver.current = new IntersectionObserver(entries => {
       // Skip if there are no articles yet (i.e.: the first load)
-      if (entries[0].isIntersecting && articles.length) {
+      // or if it's already loading a page
+      if (entries[0].isIntersecting && articles.length && !isLoading) {
         setPage(current => current + 1);
       }
     }, { threshold: 1 });
@@ -54,7 +55,7 @@ const Articles = ({ startPage, forceError }) => {
     return () => {
       scrollObserver.current.unobserve(element);
     }
-  }, [articles]);
+  }, [articles, isLoading]);
 
   useEffect(() => {
     if (allArticlesLoaded) {
