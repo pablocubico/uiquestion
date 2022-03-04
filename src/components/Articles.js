@@ -39,7 +39,7 @@ const Articles = ({ startPage, forceError }) => {
       }
     }
     fetchArticles();
-  }, [page])
+  }, [page, forceError])
 
   useEffect(() => {
     const element = loaderElement.current;
