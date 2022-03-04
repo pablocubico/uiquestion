@@ -1,0 +1,8 @@
+.errorMessage {
+  border: 1px solid #AA5555;
+  background: #FFDDDD;
+  padding: 80px;
+  border-radius: 20px;
+  margin: 40px 0;
+  text-align: center;
+}
