@@ -1,8 +1,14 @@
 .errorMessage {
   border: 1px solid #AA5555;
   background: #FFDDDD;
-  padding: 80px;
+  padding: 20px;
   border-radius: 20px;
-  margin: 40px 0;
+  margin: 20px;
   text-align: center;
+}
+
+@media (min-width: 600px) {
+  .errorMessage {
+    padding: 80px;
+  }
 }

@@ -1,13 +1,13 @@
-
 .articleList {
   max-width: 800px;
   margin: auto;
-  padding-top: 20px;
+  padding: 20px;
 }
 
 .articleCard {
   display: flex;
   justify-content: flex-start;
+  flex-direction: column;
   padding: 20px;
   box-shadow: 0 2px 20px rgba(0,0,0,.25);
   border-radius: 20px;
@@ -19,13 +19,13 @@
 .articleCard .articleContent {
   width: 100%;
   flex-grow: 2;
-  padding: 0 20px 20px 20px;
+  padding: 20px 0;
 }
 
 .articleCard .articlePicture img {
   border-radius: 10px;
-  width: 250px;
-  height: 250px;
+  width: 100%;
+  height: auto;
 }
 
 .articleCard .articleContent h1 {
@@ -44,4 +44,25 @@
   margin: 20px auto;
   align-items: center;
   justify-content: center;
+}
+
+@media (min-width: 600px) {
+  .articleList {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px 0 0 0;
+  }
+
+  .articleCard {
+    flex-direction: row;
+  }
+
+  .articleCard .articlePicture img {
+    width: 250px;
+    height: 250px;
+  }
+
+  .articleCard .articleContent {
+    padding: 0 20px 20px 20px;
+  }
 }
