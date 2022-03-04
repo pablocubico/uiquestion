@@ -1,5 +1,8 @@
 import '../styles/Articles.css';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, memo } from 'react';
+import ArticleCard from './ArticleCard';
+
+const MemoizedArticleCard = memo(ArticleCard);
 
 const Articles = ({ startPage, forceError }) => {
   const [ error, setError ] = useState(false);
@@ -70,19 +73,7 @@ const Articles = ({ startPage, forceError }) => {
       {
         articles.map((article, i) => {
           return (
-            <a key={i}
-              className='articleCard'
-              target="_blank"
-              href={ `https://www.pinkvilla.com/${article.path}` }
-              rel="noreferrer">
-              <div className='articlePicture'>
-                <img alt={ article.title } src={ `https://www.pinkvilla.com/${article.field_photo_image_section}` } />
-              </div>
-              <div className='articleContent'>
-                <h1>{ article.title }</h1>
-                <p className='articleDate'>Dec 02, 2021 03:51 AM IST</p>
-              </div>
-            </a>
+            <MemoizedArticleCard key={i} article={article}></MemoizedArticleCard>
           )
         })
       }
